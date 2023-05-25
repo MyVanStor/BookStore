@@ -5,15 +5,15 @@ import java.io.Serializable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import bookstore.entities.Book;
+import bookstore.entities.OrderBook;
 import bookstore.utils.HibernateUtils;
 
-public class BookDao {
-	public static BookDao getInstance() {
-		return new BookDao();
+public class OrderBookDao {
+	public static OrderBookDao getInstance() {
+		return new OrderBookDao();
 	}
 	
-	public boolean save(Book book) throws Exception{
+	public boolean save(OrderBook order) throws Exception{
 		Session session = null;
 		Transaction transaction = null;
 		
@@ -21,7 +21,7 @@ public class BookDao {
 			session = HibernateUtils.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			
-			Serializable result = session.save(book);
+			Serializable result = session.save(order);
 			
 			transaction.commit();
 			

@@ -9,7 +9,7 @@
   <property name="connection.username">sa</property>
   <property name="connection.password">nguyetminh110903</property>
   <!-- JDBC connection pool (use the built-in) -->
-  <property name="connection.pool_size">20</property>
+  <property name="connection.pool_size">50</property>
   <!-- SQL dialect -->
   <property name="dialect">org.hibernate.dialect.SQLServerDialect</property>
   <!-- Echo all executed SQL to stdout -->
@@ -17,6 +17,14 @@
   <!-- Drop and re-create the database schema on startup -->
   <property name="hbm2ddl.auto">update</property>
   
+  <mapping class="bookstore.entities.Author"></mapping>
   <mapping class="bookstore.entities.Book"></mapping>
+  <mapping class="bookstore.entities.Category"></mapping>
+  <mapping class="bookstore.entities.FileAttached"></mapping>
+  <mapping class="bookstore.entities.OrderBook"></mapping>
+  <mapping class="bookstore.entities.OrderItem"></mapping>
+  <mapping class="bookstore.entities.PublishingHouse"></mapping>
+  <mapping class="bookstore.entities.Rating"></mapping>
+  <mapping class="bookstore.entities.UserAccount"></mapping>
  </session-factory>
 </hibernate-configuration>

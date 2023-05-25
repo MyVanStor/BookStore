@@ -5,10 +5,15 @@ import java.io.Serializable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import bookstore.entities.UserAccount;
 import bookstore.utils.HibernateUtils;
 
 public class UserDao {
-	public boolean save(UserDao user) throws Exception{
+	public static UserDao getInstance() {
+		return new UserDao();
+	}
+	
+	public boolean save(UserAccount user) throws Exception{
 		Session session = null;
 		Transaction transaction = null;
 		

@@ -5,15 +5,15 @@ import java.io.Serializable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import bookstore.entities.Book;
+import bookstore.entities.Rating;
 import bookstore.utils.HibernateUtils;
 
-public class BookDao {
-	public static BookDao getInstance() {
-		return new BookDao();
+public class RatingDao {
+	public static RatingDao getInstance() {
+		return new RatingDao();
 	}
 	
-	public boolean save(Book book) throws Exception{
+	public boolean save(Rating ratings) throws Exception{
 		Session session = null;
 		Transaction transaction = null;
 		
@@ -21,7 +21,7 @@ public class BookDao {
 			session = HibernateUtils.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			
-			Serializable result = session.save(book);
+			Serializable result = session.save(ratings);
 			
 			transaction.commit();
 			
