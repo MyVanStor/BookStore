@@ -7,8 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -45,9 +43,7 @@ public class UserAccount {
 	@OneToMany(mappedBy = "user")
 	private Set<OrderBook> orderBook;
 
-	@ManyToMany
-	@JoinTable(name = "User_Book", schema = "dbo", joinColumns = {
-			@JoinColumn(name = "User_account_id") }, inverseJoinColumns = { @JoinColumn(name = "Book_id") })
+	@ManyToMany(mappedBy = "user")
 	private Set<Book> book;
 
 	public UserAccount() {

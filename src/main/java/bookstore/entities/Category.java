@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -28,9 +26,7 @@ public class Category {
 	@Column(name = "Number_of_book")
 	private int number;
 
-	@ManyToMany
-	@JoinTable(name = "Category_Book", schema = "dbo", joinColumns = {
-			@JoinColumn(name = "Category_id") }, inverseJoinColumns = { @JoinColumn(name = "Book_id") })
+	@ManyToMany(mappedBy = "category")
 	private Set<Book> book;
 
 	public Category() {
