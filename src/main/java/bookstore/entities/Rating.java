@@ -1,9 +1,13 @@
 package bookstore.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -11,25 +15,47 @@ import javax.persistence.Table;
 @Table(name = "Ratings", schema = "dbo")
 public class Rating {
 	@Id
-	@Column(name = "Rating_id")
-	@GeneratedValue
+	@Column(name = "rating_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ratingId;
 
-	@Column(name = "Status", nullable = false)
+	@Column(name = "status", nullable = false, columnDefinition = "TINYINT")
 	private double status;
+
+	@Column(name = "number_of_review")
+	private int numberOfReview;
 
 	@OneToOne(mappedBy = "rating")
 	private Book book;
+
+	@OneToMany(mappedBy = "rating")
+	private Set<Review> review;
 
 	public Rating() {
 
 	}
 
-	public Rating(int ratingId, double status, Book book) {
-		super();
-		this.ratingId = ratingId;
+	public Rating(double status, int numberOfReview, Book book, Set<Review> review) {
 		this.status = status;
+		this.numberOfReview = numberOfReview;
 		this.book = book;
+		this.review = review;
+	}
+
+	public int getNumberOfReview() {
+		return numberOfReview;
+	}
+
+	public void setNumberOfReview(int numberOfReview) {
+		this.numberOfReview = numberOfReview;
+	}
+
+	public Set<Review> getReview() {
+		return review;
+	}
+
+	public void setReview(Set<Review> review) {
+		this.review = review;
 	}
 
 	public int getRatingId() {

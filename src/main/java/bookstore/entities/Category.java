@@ -5,25 +5,26 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Category", schema = "dbo")
+@Table(name = "Category")
 public class Category {
 	@Id
-	@GeneratedValue
-	@Column(name = "Category_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "category_id")
 	private int categoryId;
 
-	@Column(name = "Category_name", nullable = false, unique = true)
+	@Column(name = "category_name", nullable = false, unique = true, columnDefinition = "NVARCHAR(30)")
 	private String name;
 
-	@Column(name = "Description", nullable = false)
+	@Column(name = "description", nullable = false, columnDefinition = "NVARCHAR(100)")
 	private String description;
 
-	@Column(name = "Number_of_book")
+	@Column(name = "number_of_book")
 	private int number;
 
 	@ManyToMany(mappedBy = "category")
@@ -34,8 +35,6 @@ public class Category {
 	}
 
 	public Category(int categoryId, String name, String description, int number, Set<Book> book) {
-		super();
-		this.categoryId = categoryId;
 		this.name = name;
 		this.description = description;
 		this.number = number;

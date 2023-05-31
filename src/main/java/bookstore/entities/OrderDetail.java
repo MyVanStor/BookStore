@@ -1,36 +1,37 @@
 package bookstore.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Order_Item", schema = "dbo")
-public class OrderItem {
+@Table(name = "Order_detail")
+public class OrderDetail {
 	@Id
-	@Column(name = "Order_item_id")
-	@GeneratedValue
+	@Column(name = "order_detail_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderItemId;
 
-	@ManyToOne
-	@JoinColumn(name = "Order_book_id")
+	@OneToOne
+	@JoinColumn(name = "order_book_id")
 	private OrderBook order;
 
-	@OneToOne
-	@JoinColumn(name = "Book_id")
-	private Book book;
+	@ManyToMany(mappedBy = "orderDetail")
+	private Set<Book> book;
 
-	public OrderItem() {
+	public OrderDetail() {
 
 	}
 
-	public OrderItem(int orderItemId, OrderBook order, Book book) {
-		super();
+	public OrderDetail(int orderItemId, OrderBook order, Set<Book> book) {
 		this.orderItemId = orderItemId;
 		this.order = order;
 		this.book = book;
@@ -52,11 +53,11 @@ public class OrderItem {
 		this.order = order;
 	}
 
-	public Book getBook() {
+	public Set<Book> getBook() {
 		return book;
 	}
 
-	public void setBook(Book book) {
+	public void setBook(Set<Book> book) {
 		this.book = book;
 	}
 

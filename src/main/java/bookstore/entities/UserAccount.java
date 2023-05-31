@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -15,30 +16,33 @@ import javax.persistence.Table;
 @Table(name = "User_account", schema = "dbo")
 public class UserAccount {
 	@Id
-	@Column(name = "User_account_id")
-	@GeneratedValue
+	@Column(name = "user_account_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
 
-	@Column(name = "Username", length = 255, unique = true, nullable = false)
+	@Column(name = "username", length = 255, unique = true, nullable = false)
 	private String username;
 
-	@Column(name = "Password", length = 255, nullable = false)
+	@Column(name = "password", length = 255, nullable = false)
 	private String password;
 
-	@Column(name = "Birthday")
+	@Column(name = "birthday")
 	private Date birthday;
 
-	@Column(name = "Full_name", nullable = false, length = 255)
+	@Column(name = "full_name", nullable = false, columnDefinition = "NVARCHAR(50)")
 	private String fullName;
 
-	@Column(name = "Email", nullable = false, unique = true)
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 
-	@Column(name = "Budget", nullable = false, precision = 10, scale = 2)
+	@Column(name = "budget", nullable = false, precision = 10, scale = 2)
 	private double budget;
 
-	@Column(name = "Phone", unique = true)
+	@Column(name = "phone", unique = true)
 	private int phone;
+
+	@Column(name = "sex")
+	private String sex;
 
 	@OneToMany(mappedBy = "user")
 	private Set<OrderBook> orderBook;
@@ -46,14 +50,19 @@ public class UserAccount {
 	@ManyToMany(mappedBy = "user")
 	private Set<Book> book;
 
+	@OneToMany(mappedBy = "user")
+	private Set<Review> review;
+
+	@OneToMany(mappedBy = "user")
+	private Set<PayHistory> payHistories;
+
 	public UserAccount() {
 
 	}
 
-	public UserAccount(int userId, String username, String password, Date birthday, String fullName, String email,
-			double budget, int phone, Set<OrderBook> orderBook, Set<Book> book) {
-		super();
-		this.userId = userId;
+	public UserAccount(String username, String password, Date birthday, String fullName, String email, double budget,
+			int phone, String sex, Set<OrderBook> orderBook, Set<Book> book, Set<Review> review,
+			Set<PayHistory> payHistories) {
 		this.username = username;
 		this.password = password;
 		this.birthday = birthday;
@@ -61,8 +70,35 @@ public class UserAccount {
 		this.email = email;
 		this.budget = budget;
 		this.phone = phone;
+		this.sex = sex;
 		this.orderBook = orderBook;
 		this.book = book;
+		this.review = review;
+		this.payHistories = payHistories;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public Set<Review> getReview() {
+		return review;
+	}
+
+	public void setReview(Set<Review> review) {
+		this.review = review;
+	}
+
+	public Set<PayHistory> getPayHistories() {
+		return payHistories;
+	}
+
+	public void setPayHistories(Set<PayHistory> payHistories) {
+		this.payHistories = payHistories;
 	}
 
 	public int getUserId() {

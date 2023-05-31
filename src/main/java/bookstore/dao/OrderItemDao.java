@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import bookstore.entities.OrderItem;
+import bookstore.entities.OrderDetail;
 import bookstore.utils.HibernateUtils;
 
 public class OrderItemDao {
@@ -13,7 +13,7 @@ public class OrderItemDao {
 		return new OrderItemDao();
 	}
 	
-	public boolean save(OrderItem orderItem) throws Exception{
+	public boolean save(OrderDetail orderItem) throws Exception{
 		Session session = null;
 		Transaction transaction = null;
 		

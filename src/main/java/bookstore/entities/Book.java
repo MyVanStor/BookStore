@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -18,75 +19,79 @@ import javax.persistence.Table;
 @Table(name = "Book", schema = "dbo")
 public class Book {
 	@Id
-	@Column(name = "Book_id")
-	@GeneratedValue
+	@Column(name = "book_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int bookId;
 
-	@Column(name = "Title", length = 255)
+	@Column(name = "title", columnDefinition = "NVARCHAR(50)")
 	private String title;
 
-	@Column(name = "Level", nullable = false)
+	@Column(name = "level", nullable = false)
 	private int level;
 
-	@Column(name = "Artist", length = 255)
+	@Column(name = "artist", columnDefinition = "NVARCHAR(30)")
 	private String artist;
 
 	@Column(name = "Year_of_publishing", nullable = false)
 	private Date year_of_publishing;
 
-	@Column(name = "Price", nullable = false)
+	@Column(name = "price", nullable = false, precision = 10, scale = 2)
 	private double price;
 
-	@OneToOne(mappedBy = "book")
-	private OrderItem orderItem;
+	@Column(name = "language", nullable = false, columnDefinition = "NVARCHAR(30)")
+	private String language;
 
 	@OneToOne()
-	@JoinColumn(name = "Rating_id")
+	@JoinColumn(name = "rating_id")
 	private Rating rating;
 
 	@ManyToOne
-	@JoinColumn(name = "Author_id")
+	@JoinColumn(name = "author_id")
 	private Author author;
 
 	@OneToOne
-	@JoinColumn(name = "File_attached_id")
+	@JoinColumn(name = "file_attached_id")
 	private FileAttached fileAttached;
 
 	@ManyToOne
-	@JoinColumn(name = "Publishing_house_id")
+	@JoinColumn(name = "publishing_house_id")
 	private PublishingHouse publishingHouse;
 
 	@ManyToMany
-	@JoinTable(name = "Category_Book", schema = "dbo", joinColumns = {
-			@JoinColumn(name = "Book_id") }, inverseJoinColumns = { @JoinColumn(name = "Category_id") })
+	@JoinTable(name = "Category_Book", joinColumns = {
+			@JoinColumn(name = "book_id") }, inverseJoinColumns = { @JoinColumn(name = "category_id") })
 	private Set<Category> category;
 
 	@ManyToMany
-	@JoinTable(name = "User_Book", schema = "dbo", joinColumns = {
-			@JoinColumn(name = "Book_id") }, inverseJoinColumns = { @JoinColumn(name = "User_account_id") })
+	@JoinTable(name = "User_Book", joinColumns = {
+			@JoinColumn(name = "book_id") }, inverseJoinColumns = { @JoinColumn(name = "user_account_id") })
 	private Set<UserAccount> user;
+
+	@ManyToMany
+	@JoinTable(name = "Book_OrderDetail", joinColumns = {
+			@JoinColumn(name = "book_id") }, inverseJoinColumns = { @JoinColumn(name = "order_detail_id") })
+	private Set<OrderDetail> orderDetail;
 
 	public Book() {
 
 	}
 
-	public Book(int bookId, String title, int level, String artist, Date year_of_publishing, double price,
-			OrderItem orderItem, Rating rating, Author author, FileAttached fileAttached,
-			PublishingHouse publishingHouse, Set<Category> category, Set<UserAccount> user) {
-		super();
-		this.bookId = bookId;
+	public Book(String title, int level, String artist, Date year_of_publishing, double price, String language,
+			Rating rating, Author author, FileAttached fileAttached, PublishingHouse publishingHouse,
+			Set<Category> category, Set<UserAccount> user, Set<OrderDetail> orderDetail) {
 		this.title = title;
 		this.level = level;
 		this.artist = artist;
 		this.year_of_publishing = year_of_publishing;
 		this.price = price;
-		this.orderItem = orderItem;
+		this.language = language;
 		this.rating = rating;
 		this.author = author;
 		this.fileAttached = fileAttached;
 		this.publishingHouse = publishingHouse;
 		this.category = category;
 		this.user = user;
+		this.orderDetail = orderDetail;
 	}
 
 	public int getBookId() {
@@ -137,12 +142,12 @@ public class Book {
 		this.price = price;
 	}
 
-	public OrderItem getOrderItem() {
-		return orderItem;
+	public String getLanguage() {
+		return language;
 	}
 
-	public void setOrderItem(OrderItem orderItem) {
-		this.orderItem = orderItem;
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	public Rating getRating() {
@@ -191,6 +196,14 @@ public class Book {
 
 	public void setUser(Set<UserAccount> user) {
 		this.user = user;
+	}
+
+	public Set<OrderDetail> getOrderDetail() {
+		return orderDetail;
+	}
+
+	public void setOrderDetail(Set<OrderDetail> orderDetail) {
+		this.orderDetail = orderDetail;
 	}
 
 }

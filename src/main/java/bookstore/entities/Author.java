@@ -5,33 +5,33 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Author", schema = "dbo")
+@Table(name = "Author")
 public class Author {
 	@Id
-	@GeneratedValue
-	@Column(name = "Author_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "author_id")
 	private int authorId;
 
-	@Column(name = "Full_name", nullable = false, length = 255)
+	@Column(name = "full_name", nullable = false, columnDefinition = "NVARCHAR(50)", unique = true)
 	private String fullName;
 
-	@Column(name = "Number_of_book")
+	@Column(name = "number_of_book")
 	private int numberOfBook;
 
 	@OneToMany(mappedBy = "author")
 	private Set<Book> book;
 
 	public Author() {
+		
 	}
 
 	public Author(int authorId, String fullName, int numberOfBook, Set<Book> book) {
-		super();
-		this.authorId = authorId;
 		this.fullName = fullName;
 		this.numberOfBook = numberOfBook;
 		this.book = book;

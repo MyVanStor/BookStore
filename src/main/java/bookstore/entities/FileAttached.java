@@ -3,21 +3,25 @@ package bookstore.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "File_attached", schema = "dbo")
+@Table(name = "File_attached")
 public class FileAttached {
 	@Id
-	@GeneratedValue
-	@Column(name = "File_attached_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "file_attached_id")
 	private int fileAttachedId;
 
-	@Column(name = "Path_file", nullable = false)
+	@Column(name = "path_file", nullable = false, columnDefinition = "NVARCHAR(100)")
 	private String path;
-
+	
+	@Column(name = "file_type", nullable = false, columnDefinition = "NVARCHAR(30)")
+	private String fileType;
+	
 	@OneToOne(mappedBy = "fileAttached")
 	private Book book;
 
@@ -25,10 +29,9 @@ public class FileAttached {
 
 	}
 
-	public FileAttached(int fileAttachedId, String path, Book book) {
-		super();
-		this.fileAttachedId = fileAttachedId;
+	public FileAttached(String path, String fileType, Book book) {
 		this.path = path;
+		this.fileType = fileType;
 		this.book = book;
 	}
 
