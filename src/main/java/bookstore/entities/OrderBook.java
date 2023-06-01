@@ -1,7 +1,6 @@
 package bookstore.entities;
 
 import java.sql.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +30,7 @@ public class OrderBook {
 	private Date obUpdateAt;
 
 	@OneToOne(mappedBy = "order")
-	private Set<OrderDetail> orderDetail;
+	private OrderDetail orderDetail;
 
 	@ManyToOne
 	@JoinColumn(name = "user_account_id")
@@ -44,7 +43,7 @@ public class OrderBook {
 
 	}
 
-	public OrderBook(Date orderDate, Date obCreateAt, Date obUpdateAt, Set<OrderDetail> orderDetail, UserAccount user,
+	public OrderBook(Date orderDate, Date obCreateAt, Date obUpdateAt, OrderDetail orderDetail, UserAccount user,
 			PayHistory payHistory) {
 		this.orderDate = orderDate;
 		this.obCreateAt = obCreateAt;
@@ -70,11 +69,11 @@ public class OrderBook {
 		this.obUpdateAt = obUpdateAt;
 	}
 
-	public Set<OrderDetail> getOrderDetail() {
+	public OrderDetail getOrderDetail() {
 		return orderDetail;
 	}
 
-	public void setOrderDetail(Set<OrderDetail> orderDetail) {
+	public void setOrderDetail(OrderDetail orderDetail) {
 		this.orderDetail = orderDetail;
 	}
 

@@ -38,7 +38,11 @@ public class Review {
 	@ManyToOne
 	@JoinColumn(name = "user_account_id")
 	private UserAccount user;
-
+	
+	public Review() {
+		
+	}
+	
 	public Review(int status, String comment, Date createAt, Date updateAt, Rating rating, UserAccount user) {
 		this.status = status;
 		this.comment = comment;

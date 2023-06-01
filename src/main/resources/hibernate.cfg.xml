@@ -11,7 +11,7 @@
 		<!-- JDBC connection pool (use the built-in) -->
 		<property name="connection.pool_size">1</property>
 		<!-- SQL dialect -->
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
 		<!-- Drop and re-create the database schema on startup -->
@@ -22,9 +22,11 @@
 		<mapping class="bookstore.entities.Category"></mapping>
 		<mapping class="bookstore.entities.FileAttached"></mapping>
 		<mapping class="bookstore.entities.OrderBook"></mapping>
-		<mapping class="bookstore.entities.OrderItem"></mapping>
+		<mapping class="bookstore.entities.OrderDetail"></mapping>
 		<mapping class="bookstore.entities.PublishingHouse"></mapping>
 		<mapping class="bookstore.entities.Rating"></mapping>
+		<mapping class="bookstore.entities.Review"></mapping>
 		<mapping class="bookstore.entities.UserAccount"></mapping>
+		<mapping class="bookstore.entities.PayHistory"></mapping>
 	</session-factory>
 </hibernate-configuration>

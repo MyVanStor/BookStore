@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "User_account", schema = "dbo")
+@Table(name = "User_account")
 public class UserAccount {
 	@Id
 	@Column(name = "user_account_id")

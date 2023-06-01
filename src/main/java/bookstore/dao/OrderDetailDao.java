@@ -1,20 +1,19 @@
 package bookstore.dao;
 
 import java.io.Serializable;
-import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import bookstore.entities.Rating;
+import bookstore.entities.OrderDetail;
 import bookstore.utils.HibernateUtils;
 
-public class RatingDao {
-	public static RatingDao getInstance() {
-		return new RatingDao();
+public class OrderDetailDao {
+	public static OrderDetailDao getInstance() {
+		return new OrderDetailDao();
 	}
 	
-	public boolean save(Rating ratings) throws Exception{
+	public boolean save(OrderDetail orderItem) throws Exception{
 		Session session = null;
 		Transaction transaction = null;
 		
@@ -22,7 +21,7 @@ public class RatingDao {
 			session = HibernateUtils.getSessionFactory().openSession();
 			transaction = session.beginTransaction();
 			
-			Serializable result = session.save(ratings);
+			Serializable result = session.save(orderItem);
 			
 			transaction.commit();
 			
@@ -34,6 +33,4 @@ public class RatingDao {
 			}
 		}
 	}
-	
-	public List<E>
 }

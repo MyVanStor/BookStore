@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Publishing_house", schema = "dbo")
+@Table(name = "Publishing_house")
 public class PublishingHouse {
 	@Id
 	@Column(name = "publishing_house_id")

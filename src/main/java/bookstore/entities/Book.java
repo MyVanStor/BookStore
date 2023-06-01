@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Book", schema = "dbo")
+@Table(name = "Book")
 public class Book {
 	@Id
 	@Column(name = "book_id")
@@ -32,7 +32,7 @@ public class Book {
 	@Column(name = "artist", columnDefinition = "NVARCHAR(30)")
 	private String artist;
 
-	@Column(name = "Year_of_publishing", nullable = false)
+	@Column(name = "year_of_publishing", nullable = false)
 	private Date year_of_publishing;
 
 	@Column(name = "price", nullable = false, precision = 10, scale = 2)
