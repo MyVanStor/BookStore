@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -31,18 +32,18 @@ public class Review {
 	@Column(name = "update_at", nullable = false, columnDefinition = "DATETIME")
 	private Date updateAt;
 
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "rating_id")
 	private Rating rating;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_account_id")
 	private UserAccount user;
-	
+
 	public Review() {
-		
+
 	}
-	
+
 	public Review(int status, String comment, Date createAt, Date updateAt, Rating rating, UserAccount user) {
 		this.status = status;
 		this.comment = comment;
@@ -106,6 +107,12 @@ public class Review {
 
 	public void setUser(UserAccount user) {
 		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Review [reviewId=" + reviewId + ", status=" + status + ", comment=" + comment + ", createAt=" + createAt
+				+ ", updateAt=" + updateAt + "]";
 	}
 
 }

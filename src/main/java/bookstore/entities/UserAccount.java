@@ -40,10 +40,12 @@ public class UserAccount {
 
 	@Column(name = "phone", unique = true)
 	private int phone;
-
+	
 	@Column(name = "sex")
 	private String sex;
-
+	
+	@Column(name = "role")
+	private String role;
 	@OneToMany(mappedBy = "user")
 	private Set<OrderBook> orderBook;
 

@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,10 +26,10 @@ public class Rating {
 	@Column(name = "number_of_review")
 	private int numberOfReview;
 
-	@OneToOne(mappedBy = "rating")
+	@OneToOne(mappedBy = "rating", fetch = FetchType.LAZY)
 	private Book book;
 
-	@OneToMany(mappedBy = "rating")
+	@OneToMany(mappedBy = "rating", fetch = FetchType.LAZY)
 	private Set<Review> review;
 
 	public Rating() {
@@ -41,7 +42,12 @@ public class Rating {
 		this.book = book;
 		this.review = review;
 	}
-
+	
+	public Rating(int ratingId, double status) {
+		this.ratingId = ratingId;
+		this.status = status;
+	}
+	
 	public int getNumberOfReview() {
 		return numberOfReview;
 	}
@@ -80,6 +86,11 @@ public class Rating {
 
 	public void setBook(Book book) {
 		this.book = book;
+	}
+
+	@Override
+	public String toString() {
+		return "Rating [ratingId=" + ratingId + ", status=" + status + ", numberOfReview=" + numberOfReview + "]";
 	}
 
 }
