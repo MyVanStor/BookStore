@@ -7,7 +7,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
-import javax.swing.GroupLayout.Group;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -53,11 +52,11 @@ public class RatingDao {
 
 			Query<Rating> query = session.createNativeQuery(url).addEntity(Rating.class);
 
-//			List<Rating> list = query.list();
-//			
-//			for (Rating rating : list) {
-//				System.out.println(rating.toString());
-//			}
+			List<Rating> list = query.list();
+			
+			for (Rating rating : list) {
+				System.out.println(rating.toString());
+			}
 
 			return query.list();
 		} finally {
@@ -217,12 +216,12 @@ public class RatingDao {
 			Root<Rating> root = cirteria.from(Rating.class);
 			// Tên thuộc tính
 			Path<Long> idPath = root.get("ratingId");
-			Path<Double> status = root.get("status"); 
+			Path<Double> status = root.get("status");
 			Path<Long> review = root.get("numberOfReview");
 			
 			cirteria.multiselect(idPath, status, review);
 			
-			cirteria.groupBy(root.get("numberOfReview"));
+			cirteria.groupBy(status, review, idPath);
 			
 			cirteria.having(builder.greaterThan(root.get("numberOfReview"), 1));
 			

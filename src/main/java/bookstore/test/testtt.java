@@ -4,7 +4,7 @@ import bookstore.dao.RatingDao;
 
 public class testtt {
 	public static void main(String[] args) throws Exception {
-//		List<Rating> list= RatingDao.getInstance().findAll();
+		RatingDao.getInstance().findAll();
 		
 //		List<Review> list = ReviewDao.getInstance().findByComment("cmt1");
 	
@@ -14,6 +14,6 @@ public class testtt {
 		
 //		RatingDao.getInstance().searchAll();
 		
-		RatingDao.getInstance().criteriaBuilderGroupBy();
+//		RatingDao.getInstance().criteriaBuilderGroupBy();
 	}
 }

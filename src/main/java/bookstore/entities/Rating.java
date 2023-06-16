@@ -35,7 +35,7 @@ public class Rating {
 	public Rating() {
 
 	}
-
+	
 	public Rating(double status, int numberOfReview, Book book, Set<Review> review) {
 		this.status = status;
 		this.numberOfReview = numberOfReview;
